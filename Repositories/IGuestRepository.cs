@@ -8,17 +8,6 @@ namespace FDR.Repositories;
 
 public interface IGuestRepository
 {
-    /*
-POST
-
-GET all 🔒
-GET Id 🔒
-DELETE id 🔒
-GET keyword 🔒
-
-PUT id 🔒
-
-    */
     Task<IEnumerable<GuestDTO>> GetAll();
     Task<GuestDTO> GetById(int id);
     Task<GuestDTO> GetByKeyword(string keyword);
