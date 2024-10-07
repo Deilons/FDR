@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace FDR.Controllers.V1.Rooms
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/rooms")]
+    [ApiExplorerSettings(GroupName = "v1")]
+    [Tags("Rooms")]
     public class RoomGETControllers : RoomController
     {
         public RoomGETControllers(IRoomRepository RoomRepository) : base(RoomRepository)

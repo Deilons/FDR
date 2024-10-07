@@ -77,25 +77,24 @@ public class RoomServices : IRoomRepository
 
     public async Task<RoomDTO> GetById(int id)
     {
-        var room = await _context.Rooms.FindAsync(id);
-        if (room == null)
-        {
-            return null;
-        }
-        return new RoomDTO
-        {
-            Id = room.Id,
-            RoomTypeId = room.RoomTypeId,
-            RoomType = new RoomTypeDTO
+        return await _context.Rooms
+            .Where(r => r.Id == id)
+            .Select(r => new RoomDTO
             {
-                Id = room.RoomType.Id,
-                Name = room.RoomType.Name,
-                Description = room.RoomType.Description
-            },
-            RoomNumber = room.RoomNumber,
-            Available = room.Available,
-            MaxOccupancyPersons = room.MaxOccupancyPersons
-        };
+                Id = r.Id,
+                RoomTypeId = r.RoomTypeId,
+                RoomType = new RoomTypeDTO
+                {
+                    Id = r.RoomType.Id,
+                    Name = r.RoomType.Name,
+                    Description = r.RoomType.Description
+                },
+                RoomNumber = r.RoomNumber,
+                Available = r.Available,
+                MaxOccupancyPersons = r.MaxOccupancyPersons
+            })
+            .FirstOrDefaultAsync();
+
     }
 
     public async Task<IEnumerable<RoomDTO>> GetOccupied()
