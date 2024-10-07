@@ -7,11 +7,11 @@ namespace FDR.DTOs;
 
 public class RoomDTO
 {
-
     public int Id { get; set; }
-    public string RoomName { get; set; }
     public int RoomTypeId { get; set; }
-    public double PricePerNight { get; set; }
-    public bool Availability { get; set; }
+    public RoomTypeDTO RoomType { get; set; }
+    public string RoomNumber { get; set; }
+    public string Description { get; set; }
+    public bool Available { get; set; } 
     public int MaxOccupancyPersons { get; set; }
 }
