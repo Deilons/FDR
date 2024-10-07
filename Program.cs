@@ -48,8 +48,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // welcome page
-app.MapGet("/", () => Results.Content(@"
-    <!DOCTYPE html>
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        var htmlContent = @"    <!DOCTYPE html>
     <html lang='es'>
     <head>
         <meta charset='UTF-8'>
@@ -100,9 +103,15 @@ app.MapGet("/", () => Results.Content(@"
         <h1>Welcome to  <span> FDR </span>  API</h1>
         <p>Check out the API documentation: <a href='/swagger/index.html'>Swagger</a>.</p>
     </body>
-    </html>
-", "text/html"));
-
+    </html>";
+        context.Response.ContentType = "text/html";
+        await context.Response.WriteAsync(htmlContent);
+    }
+    else
+    {
+        await next();
+    }
+});
 app.MapControllers();
 
 app.Run();
