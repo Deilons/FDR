@@ -13,4 +13,6 @@ public interface IRoomRepository
     Task<IEnumerable<RoomDTO>> GetAvailable();
     Task<IEnumerable<RoomDTO>> GetOccupied();
     Task<IEnumerable<RoomDTO>> GetStatus();
+    Task<bool> CheckExistence(int id);
+
 }
