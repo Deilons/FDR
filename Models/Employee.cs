@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FDR.Models;
 
 [Table("Employees")]
-public class Empleoyee
+public class Employee
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -38,6 +38,6 @@ public class Empleoyee
     [MaxLength(255, ErrorMessage = "Password cannot exceed 255 characters")]
     public string Password { get; set; }
 
-    //public ICollection<Booking> Bookings { get; set; }
+    public ICollection<Booking> Bookings { get; set; }
 
 }

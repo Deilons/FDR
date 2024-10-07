@@ -41,6 +41,6 @@ public class Guest
 
     public DateOnly BirthDate { get; set; }
 
-    //public ICollection<Booking> Bookings { get; set; }
+    public ICollection<Booking> Bookings { get; set; }
 
 }

@@ -32,5 +32,5 @@ public class Room
 
     public RoomType RoomType { get; set; }
 
-    //public ICollection<Booking> Bookings { get; set; }
+    public ICollection<Booking> Bookings { get; set; }
 }
