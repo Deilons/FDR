@@ -1,4 +1,5 @@
 using FDR.Models;
+using FDR.Seeders;
 using Microsoft.EntityFrameworkCore;
 
 namespace FDR.Data;
@@ -38,5 +39,8 @@ public class ApplicationDbContext : DbContext
             .HasOne(b => b.Employee)
             .WithMany(e => e.Bookings)
             .HasForeignKey(b => b.EmployeeId);
+
+        RoomTypeSeeders.SeedRoomTypes(modelBuilder);
+        RoomSeeders.SeedRooms(modelBuilder);
     }
 }
