@@ -31,7 +31,7 @@ builder.Services.AddScoped<IGuestRepository, GuestServices>();
 builder.Services.AddScoped<IRoomTypeRepository, RoomTypeServices>();
 builder.Services.AddScoped<IRoomRepository, RoomServices>();
 builder.Services.AddScoped<IBookingRepository, BookingServices>();
-builder.Services.AddScoped<IEmployeeRepository, EmployeeServices>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeService>();
 
 builder.Services.AddSingleton<Utilities>();
 builder.Services.AddAuthentication(config =>
