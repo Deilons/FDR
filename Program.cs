@@ -23,7 +23,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Services
 builder.Services.AddScoped<IGuestRepository, GuestServices>();
-builder.Services.AddScoped<IRommTypeRepository, RoomTypeServices>();
+builder.Services.AddScoped<IRoomTypeRepository, RoomTypeServices>();
 builder.Services.AddScoped<IRoomRepository, RoomServices>();
 builder.Services.AddScoped<IBookingRepository, BookingServices>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeServices>();
@@ -52,7 +52,8 @@ app.Use(async (context, next) =>
 {
     if (context.Request.Path == "/")
     {
-        var htmlContent = @"    <!DOCTYPE html>
+        var htmlContent = @"    
+        <!DOCTYPE html>
     <html lang='es'>
     <head>
         <meta charset='UTF-8'>

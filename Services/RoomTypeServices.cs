@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FDR.Services;
 
-public class RoomTypeServices : IRommTypeRepository
+public class RoomTypeServices : IRoomTypeRepository
 {
     private readonly ApplicationDbContext _context;
 

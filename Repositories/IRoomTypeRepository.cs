@@ -6,7 +6,7 @@ using FDR.Models;
 
 namespace FDR.Repositories;
 
-public interface IRommTypeRepository
+public interface IRoomTypeRepository
 {
     Task<IEnumerable<RoomType>> GetAll();
     Task<RoomType> GetById(int id);
