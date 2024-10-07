@@ -14,4 +14,8 @@ public class BookingDTO
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public double TotalCost { get; set; }
+
+    public RoomDTO Room { get; set; }
+    public GuestDTO Guest { get; set; }
+    public EmployeeDTO Employee { get; set; }
 }
