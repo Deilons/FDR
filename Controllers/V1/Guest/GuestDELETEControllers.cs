@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using FDR.Repositories;
 using FDR.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FDR.Controllers.V1.Guest
 {
     [ApiController]
     [Route("api/v1/guest")]
+    [Authorize]
     [ApiExplorerSettings(GroupName = "v1")]
     [Tags("Guest")]
     public class GuestDELETEControllers : GuestController

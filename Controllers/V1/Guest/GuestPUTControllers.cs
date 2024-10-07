@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using FDR.DTOs;
 using FDR.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FDR.Controllers.V1.Guest
 {
     [ApiController]
+    [Authorize]
     [Route("api/v1/guest")]
     [ApiExplorerSettings(GroupName = "v1")]
     [Tags("Guest")]
