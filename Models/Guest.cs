@@ -39,7 +39,7 @@ public class Guest
     [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
     public string PhoneNumber { get; set; }
 
-    public DateOnly BirthDate { get; set; }
+    public DateTime BirthDate { get; set; }
 
     public ICollection<Booking> Bookings { get; set; }
 
