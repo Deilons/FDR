@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FDR.Repositories;
-using FiltroDotnet.Config;
+using FDR.Config;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FDR.Controllers.V1.Auth

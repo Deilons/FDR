@@ -6,7 +6,7 @@ using FDR.Data;
 using FDR.DTOs;
 using FDR.Models;
 using FDR.Repositories;
-using FiltroDotnet.Config;
+using FDR.Config;
 using Microsoft.EntityFrameworkCore;
 
 namespace FDR.Services;
@@ -22,39 +22,36 @@ public class EmployeeService : IEmployeeRepository
         _utilities = utilities;
     }
 
-    public async Task Register(EmployeeDTO employee)
-    {
-        employee.Password = _utilities.EncryptSHA256(employee.Password);
-
-        var newEmployee = new Employee
+    public async Task Register(EmployeeDTO user)
         {
-            FirstName = employee.FirstName.ToLower(),
-            LastName = employee.LastName.ToLower(),
-            IdentificationNumber = employee.IdentificationNumber.ToLower(),
-            Email = employee.Email.ToLower(),
-            Password = employee.Password,
-        };
-
-        _context.Employees.Add(newEmployee);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task<string> Login(LoginDTO loginInfo)
-    {
-        var employee = await _context.Employees.FirstOrDefaultAsync(employee => employee.Email == loginInfo.Email);
-
-        if (employee == null)
-        { 
-            return null;
+            user.Password = _utilities.EncryptSHA256(user.Password);
+            var user1 = new Employee
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                IdentificationNumber = user.IdentificationNumber,
+                Password = user.Password, 
+            };
+            _context.Employees.Add(user1);
+            await _context.SaveChangesAsync();
         }
 
-        if (employee.Password == _utilities.EncryptSHA256(loginInfo.Password))
+        public async Task<string> Login(LoginDTO login)
         {
-            var token = _utilities.GenerateJwtToken(employee);
-            return token;
-        }
+            var user1 = await _context.Employees.FirstOrDefaultAsync(u => u.Email == login.Email);
 
-        return null;
+            if (user1 != null)
+            {
+                if (user1.Password == _utilities.EncryptSHA256(login.Password))
+                {
+                    var token = _utilities.GenerateJwtToken(user1);
+                    return token;
+                }
+            }
+
+            return "User or password invalid";
         }
 
     public async Task<IEnumerable<Employee>> GetAll()

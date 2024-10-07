@@ -1,4 +1,3 @@
-
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -6,7 +5,7 @@ using System.Text;
 using FDR.Models;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FiltroDotnet.Config
+namespace FDR.Config
 {
     public class Utilities
     {
@@ -26,26 +25,30 @@ namespace FiltroDotnet.Config
 
         public string GenerateJwtToken(Employee employee)
         {
+            // Create claims for the user
             var claims = new[]
             {
-            new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
-            new Claim(ClaimTypes.Name, employee.FirstName + " " + employee.LastName),
-            
+            new Claim(ClaimTypes.NameIdentifier,employee.Id.ToString()),
+            new Claim(ClaimTypes.Email,employee.Email),
         };
 
+            // Fetch JWT configuration values from environment variables
             var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
             var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
             var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
-            var jwtExpiresIn = Environment.GetEnvironmentVariable("JWT_EXPIRES_IN");
+            var jwtExpiresIn = Environment.GetEnvironmentVariable("JWT_EXPIREMINUTES");
 
+            // Validate that the required environment variables exist
             if (string.IsNullOrEmpty(jwtKey) || string.IsNullOrEmpty(jwtIssuer) || string.IsNullOrEmpty(jwtAudience))
             {
                 throw new InvalidOperationException("JWT configuration values are missing.");
             }
 
+            // Create a security key using the JWT key
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            // Create the JWT token
             var token = new JwtSecurityToken(
                 issuer: jwtIssuer,
                 audience: jwtAudience,
@@ -54,6 +57,7 @@ namespace FiltroDotnet.Config
                 signingCredentials: credentials
             );
 
+            // Return the generated JWT token as a string
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

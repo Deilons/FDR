@@ -17,8 +17,6 @@ namespace FDR.Controllers.V1.Guest
         public GuestPUTControllers(IGuestRepository guestRepository) : base(guestRepository)
         {
         }
-
-
         [HttpPut ("{id}")]
         public async Task<ActionResult> Update(int id, GuestDTO guestDTO)
         {

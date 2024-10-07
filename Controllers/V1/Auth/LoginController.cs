@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FDR.DTOs;
 using FDR.Repositories;
-using FiltroDotnet.Config;
+using FDR.Config;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -20,28 +20,13 @@ namespace FDR.Controllers.V1.Auth
         }
         [HttpPost]
         [Route("login")]
-        [SwaggerOperation(
-    Summary = "Login Employee",
-    Description = "Login Employee with email and password"
-)]
-        [SwaggerResponse(200, "Employee logged in successfully")]
-        [SwaggerResponse(400, "Bad request")]
-        [SwaggerResponse(401, "Unauthorized")]
-        public async Task<IActionResult> Login(LoginDTO employee)
+        public async Task<ActionResult<string>> login( LoginDTO login)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var token = await services.Login(login);
+            return Ok($"Logged in successfully this is your token: {token}");
+            //login.Password = _utilities.EncryptSHA256(login.Password);
+            //return Ok(await services.Login(login));
 
-            var token = await services.Login(employee);
-
-            if (token == null)
-            {
-                return Unauthorized("You don't have permissions");
-            }
-
-            else { return Ok($"Here's the token: {token}"); }
         }
     }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FDR.Models;
 using FDR.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using FiltroDotnet.Config;
+using FDR.Config;
 
 namespace FDR.Controllers.V1.Auth
 {

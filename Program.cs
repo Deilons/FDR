@@ -3,7 +3,7 @@ using DotNetEnv;
 using FDR.Data;
 using FDR.Repositories;
 using FDR.Services;
-using FiltroDotnet.Config;
+using FDR.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(config =>
     {
         ValidateIssuer = true,
         ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
-        ValidateAudience = false,
+        ValidateAudience = false, 
         ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero,
@@ -60,24 +60,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = ".NET Module Performance Test",
-        Version = "v1",
-        Contact = new OpenApiContact
-        {
-            Name = "David SC",
-            Email = "Apolo4748@gmail.com",
-        }
-    });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hotel", Version = "v1" });
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "This performance test seeks to develop a RESTful API that allows a hotel to manage its reservations.",
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         Scheme = "Bearer"
     });
+    c.EnableAnnotations();
+
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
