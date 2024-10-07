@@ -1,0 +1,6 @@
+@FDR_HostAddress = http://localhost:5105
+
+GET {{FDR_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
