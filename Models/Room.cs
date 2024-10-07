@@ -29,4 +29,8 @@ public class Room
     [Required]
     [Range(1, 20)] 
     public int MaxOccupancyPersons { get; set; }
+
+    public RoomType RoomType { get; set; }
+
+    //public ICollection<Booking> Bookings { get; set; }
 }
